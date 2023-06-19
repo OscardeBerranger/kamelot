@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}You like Kamelot ?{% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('home') }}
+        {% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for citation in citations %}
+                <div class="card m-2">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ citation.citation.infos.personnage }}</h5>
+                        <div class="card-text">{{ citation.citation.citation }}</div>
+
+                        {% if app.user %}
+                            <form action="{{ path('app_home_saveCitation') }}" method="post">
+                                <input type="hidden" value="{{ citation.citation.infos.personnage }}" name="auteur">
+                                <input type="hidden" value="{{ citation.citation.citation }}" name="content">
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </form>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

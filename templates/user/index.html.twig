@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_home') }}" class="btn btn-primary">home</a>
+    {% for citation in app.user.citations %}
+        <div class="container">
+            <div class="row">
+                <div class="card m-2">
+                    <div class="card-body">
+                        <div class="card-title">{{ citation.auteur }}</div>
+                        <div class="card-text"> {{ citation.content }} </div>
+                        <a href="{{ path('app_citation_removeuser', {id: citation.id}) }}" class="btn btn-danger">remove citation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CitationController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for citation in citations %}
+                <div class="card m-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ citation.auteur }}</h5>
+                        <div class="card-text">{{ citation.content }}</div>
+                        {% if 'ROLE_ADMIN' in app.user.roles %}
+                            <a href="{{ path('app_citation_removecitation', {id: citation.id}) }}" class="btn btn-danger">delete quote</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

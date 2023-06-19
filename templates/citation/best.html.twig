@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CitationController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for citation in citations %}
+                <div class="card m-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ citation.0.auteur }}</h5>
+                        <div class="card-text">{{ citation.0.content }}</div>
+                        {% if app.user %}
+                            <form action="{{ path('app_home_saveCitation') }}" method="post">
+                                <input type="hidden" value="{{ citation.0.auteur}}" name="auteur">
+                                <input type="hidden" value="{{ citation.0.content }}" name="content">
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </form>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
